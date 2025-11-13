@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔗 Metallization | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>🔗 Metal Layers</h1>
+        <p>Interconnect deposition and patterning</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>Process</h2>
+        <pre><code>class Metal:
+  def deposit(self, layer):
+    sputter(Al, 500nm)
+    pattern(litho)
+    etch(wet)</code></pre>
+
+        <h2>Layer Stack</h2>
+        <table>
+            <tr><th>Layer</th><th>Material</th><th>Thickness</th><th>Purpose</th></tr>
+            <tr><td>Metal 1</td><td>Aluminum</td><td>500nm</td><td>Local routes</td></tr>
+            <tr><td>Via 1</td><td>Al</td><td>800nm</td><td>M1→M2 connect</td></tr>
+            <tr><td>Metal 2</td><td>Aluminum</td><td>800nm</td><td>Power/clock</td></tr>
+            <tr><td>Via 2</td><td>Al</td><td>1µm</td><td>M2→M3 connect</td></tr>
+            <tr><td>Metal 3</td><td>Aluminum</td><td>1µm</td><td>Top I/O pads</td></tr>
+        </table>
+
+        <h2>Deposition Methods</h2>
+        <ul>
+            <li><strong>Sputtering ($3K):</strong> Best quality, uniform</li>
+            <li><strong>Evaporation ($1K):</strong> Budget option, OK quality</li>
+            <li><strong>Electroplating:</strong> Vias only, cheapest</li>
+        </ul>
+
+        <h2>Patterning</h2>
+        <ul>
+            <li>Spin PR on metal</li>
+            <li>Expose with mask</li>
+            <li>Develop photoresist</li>
+            <li>Wet etch Al (H3PO4 based)</li>
+            <li>Strip remaining PR</li>
+        </ul>
+
+        <h2>Cost</h2>
+        <p>💰 Evaporator: $1K | Sputterer: $3K | Chemicals: $50</p>
+
+        <h2>Key Parameters</h2>
+        <ul>
+            <li>Sheet resistance: 0.05Ω/sq target</li>
+            <li>Step coverage: 50%+ (conformal)</li>
+            <li>Via resistance: &lt;1Ω per contact</li>
+        </ul>
+    </section>
+
+    <footer><a href="test.html">Next: 🧠 Test →</a></footer>
+</body>
+</html>

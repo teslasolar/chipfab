@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🔧 Troubleshooting | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>🔧 Troubleshooting Guide</h1>
+        <p>Common issues and fixes</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>Lithography Issues</h2>
+        <table>
+            <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+            <tr><td>Blurry patterns</td><td>Poor mask contact</td><td>Improve vacuum/pressure</td></tr>
+            <tr><td>Underexposed</td><td>UV dose too low</td><td>Increase exposure time</td></tr>
+            <tr><td>Overexposed</td><td>UV dose too high</td><td>Reduce time or distance</td></tr>
+            <tr><td>Alignment off</td><td>Mechanical drift</td><td>Upgrade aligner, add fiducials</td></tr>
+        </table>
+
+        <h2>Etching Problems</h2>
+        <table>
+            <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+            <tr><td>Over-etch</td><td>Time too long</td><td>Monitor etch rate, reduce time</td></tr>
+            <tr><td>Under-etch</td><td>Depleted etchant</td><td>Fresh chemicals, stir</td></tr>
+            <tr><td>Rough surface</td><td>Poor selectivity</td><td>Adjust etchant ratio</td></tr>
+            <tr><td>PR lifting</td><td>Weak adhesion</td><td>Better clean, HMDS primer</td></tr>
+        </table>
+
+        <h2>Doping/Diffusion</h2>
+        <table>
+            <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+            <tr><td>Low carrier conc.</td><td>Temp too low</td><td>Verify furnace calibration</td></tr>
+            <tr><td>Uneven doping</td><td>Poor gas flow</td><td>Check N2 distribution</td></tr>
+            <tr><td>Junction too deep</td><td>Time too long</td><td>Reduce diffusion time</td></tr>
+            <tr><td>Contamination</td><td>Dirty furnace</td><td>Clean tube regularly</td></tr>
+        </table>
+
+        <h2>Testing Failures</h2>
+        <ul>
+            <li><strong>No continuity:</strong> Check probe contact, oxide removal</li>
+            <li><strong>Won't boot:</strong> Verify power supply, check programming</li>
+            <li><strong>Low yield:</strong> Review all process parameters</li>
+            <li><strong>Random failures:</strong> ESD damage, improve grounding</li>
+        </ul>
+
+        <h2>Equipment Issues</h2>
+        <ul>
+            <li><strong>Furnace won't heat:</strong> Check heating elements, controller</li>
+            <li><strong>Spin coater uneven:</strong> Level platform, clean chuck</li>
+            <li><strong>UV lamp dim:</strong> Replace bulb (500hr lifetime)</li>
+            <li><strong>Hood not venting:</strong> Check fan, filters, ductwork</li>
+        </ul>
+
+        <h2>When to Ask for Help</h2>
+        <ul>
+            <li>Persistent yield below 40%</li>
+            <li>Chemical safety concerns</li>
+            <li>Equipment malfunctions</li>
+            <li>Process completely failing</li>
+        </ul>
+    </section>
+
+    <footer><a href="faq.html">Next: FAQ →</a></footer>
+</body>
+</html>

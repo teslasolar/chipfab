@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🏗️ Components | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>🏗️ Fab Components</h1>
+        <p>Every step of the fabrication process</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>📦 Process Steps</h2>
+        <div class="grid">
+            <a href="design.html" class="card">🎯 Design<br><small>AI RTL→GDS</small></a>
+            <a href="wafer.html" class="card">💎 Wafer<br><small>Si substrate</small></a>
+            <a href="litho.html" class="card">📏 Litho<br><small>UV exposure</small></a>
+            <a href="etch.html" class="card">⚡ Etch<br><small>Wet/dry</small></a>
+            <a href="doping.html" class="card">🧪 Doping<br><small>Diffusion</small></a>
+            <a href="anneal.html" class="card">🔥 Anneal<br><small>Heat treat</small></a>
+            <a href="metal.html" class="card">🔗 Metal<br><small>3 layers</small></a>
+            <a href="test.html" class="card">🧠 Test<br><small>AI validate</small></a>
+        </div>
+
+        <h2>📡 Typical Flow</h2>
+        <pre>
+Design (2h)
+  ↓
+Masks (1 week) ← order externally
+  ↓
+Wafer prep (4h)
+  ↓
+Litho × 6 (2 days) ← iterate per layer
+  ↓
+Doping × 2 (16h) ← n-type & p-type
+  ↓
+Metal × 3 layers (3 days)
+  ↓
+Anneal (4h)
+  ↓
+Test (2h/batch)
+  ↓
+Package (external or DIY)
+        </pre>
+
+        <h2>⏱️ Timeline</h2>
+        <ul>
+            <li><strong>First run:</strong> 5 weeks (includes mask order)</li>
+            <li><strong>Repeat runs:</strong> 2 weeks (masks reusable)</li>
+            <li><strong>Active work:</strong> ~40 hours per batch</li>
+            <li><strong>Waiting:</strong> Mostly diffusion & shipping</li>
+        </ul>
+    </section>
+
+    <footer><a href="../flow/">See detailed flow →</a></footer>
+</body>
+</html>
