@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📏 Lithography | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>📏 Lithography</h1>
+        <p>UV pattern transfer to photoresist</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>Process</h2>
+        <pre><code>class Litho:
+  def expose(self, mask, wafer):
+    align()
+    UV(365nm, 60s)
+    dev(120s)</code></pre>
+
+        <h2>Specs</h2>
+        <ul>
+            <li>Wavelength: 365nm (i-line)</li>
+            <li>Min feature: 2µm</li>
+            <li>Alignment: &lt;500nm</li>
+            <li>Layers: 6× (multi-step)</li>
+        </ul>
+
+        <h2>Cost</h2>
+        <p>💰 Equipment: $700 | Masks: $500</p>
+
+        <h2>Equipment</h2>
+        <ul>
+            <li>UV source: AliExpress $200</li>
+            <li>Mask aligner: DIY/eBay $500</li>
+            <li>Photomasks: FrontRange $300-500</li>
+        </ul>
+    </section>
+
+    <footer><a href="etch.html">Next: ⚡ Etch →</a></footer>
+</body>
+</html>

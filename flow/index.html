@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📡 Process Flow | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>📡 Fabrication Flow</h1>
+        <p>End-to-end chip production timeline</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>🎨 Architecture</h2>
+        <pre>
+[AI] → [RTL] → [GDS] → [Masks]
+  ↓
+[Wafer] → [6× Litho] → [Dope] → [Metal]
+  ↓
+[Test] → [Package] → [$500 chip]
+        </pre>
+
+        <h2>⏱️ Timeline</h2>
+        <table>
+            <tr><th>Step</th><th>Time</th><th>Cost</th></tr>
+            <tr><td>🎯 Design</td><td>2 hours</td><td>$0</td></tr>
+            <tr><td>📏 Masks</td><td>1 week</td><td>$500</td></tr>
+            <tr><td>💎 Wafer prep</td><td>4 hours</td><td>$50</td></tr>
+            <tr><td>📏 Litho (6×)</td><td>2 days</td><td>$20</td></tr>
+            <tr><td>🧪 Doping (2×)</td><td>16 hours</td><td>$30</td></tr>
+            <tr><td>⚡ Metal layers</td><td>1 day</td><td>$10</td></tr>
+            <tr><td>🔥 Anneal</td><td>4 hours</td><td>$0</td></tr>
+            <tr><td>🧠 Test</td><td>2 hours</td><td>$5/chip</td></tr>
+            <tr><td>📦 Package</td><td>1 day</td><td>$125</td></tr>
+            <tr><th>TOTAL (First run)</th><th>5 weeks</th><th>$740</th></tr>
+            <tr><th>TOTAL (Repeat)</th><th>2 weeks</th><th>$240</th></tr>
+        </table>
+
+        <h2>✅ Quality Gates</h2>
+        <ul>
+            <li>Wafer: thickness=500µm, roughness&lt;10nm</li>
+            <li>Litho: min_feature&lt;2µm, align&lt;500nm</li>
+            <li>Test: boot() && compute(vec)==expected</li>
+            <li>Yield: &gt;60% functional chips</li>
+            <li>Economics: cost&lt;$15, retail&gt;$400</li>
+        </ul>
+    </section>
+
+    <footer><a href="../index.html">← Back to Home</a></footer>
+</body>
+</html>

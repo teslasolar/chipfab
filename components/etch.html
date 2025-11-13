@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>⚡ Etch | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>⚡ Etching</h1>
+        <p>Wet/dry removal of unwanted material</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>Process</h2>
+        <pre><code>class Etch:
+  def etch(self, wafer, depth):
+    expose(HF | SF6)
+    wait(t)
+    rinse()</code></pre>
+
+        <h2>Specs</h2>
+        <ul>
+            <li>Wet: HF/HNO3 solution</li>
+            <li>Dry: SF6 plasma (optional)</li>
+            <li>Rate: 100nm/min typical</li>
+            <li>Selectivity: 10:1 oxide:Si</li>
+        </ul>
+
+        <h2>Cost</h2>
+        <p>💰 Wet: $200 | Plasma: $1K</p>
+
+        <h2>Safety ⚠️</h2>
+        <ul>
+            <li>HF requires Ca-gluconate kit</li>
+            <li>Fume hood mandatory</li>
+            <li>PPE: Face shield, gloves</li>
+        </ul>
+    </section>
+
+    <footer><a href="doping.html">Next: 🧪 Doping →</a></footer>
+</body>
+</html>

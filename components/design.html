@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🎯 Design | LocalChip</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <header>
+        <h1>🎯 Design Phase</h1>
+        <p>AI-Generated RTL → Synthesized GDS</p>
+    </header>
+    <nav><a href="../index.html">← Home</a></nav>
+
+    <section>
+        <h2>Process</h2>
+        <pre><code>class Design:
+  def gen(self, spec):
+    self.rtl = llm(f"Verilog {spec}", 50K)
+    self.gds = synth(self.rtl)</code></pre>
+
+        <h2>Specs</h2>
+        <ul>
+            <li>Output: 50K lines Verilog</li>
+            <li>Tools: Claude/GPT → OpenROAD</li>
+            <li>PDK: SkyWater 130nm (adaptable)</li>
+            <li>Time: 2 hours</li>
+        </ul>
+
+        <h2>Cost</h2>
+        <p>💰 $0 (AI API usage only)</p>
+
+        <h2>Tools</h2>
+        <ul>
+            <li>OpenLane: Full RTL-to-GDS flow</li>
+            <li>Magic: Layout viewer/editor</li>
+            <li>KLayout: GDS manipulation</li>
+        </ul>
+    </section>
+
+    <footer><a href="wafer.html">Next: 💎 Wafer →</a></footer>
+</body>
+</html>
