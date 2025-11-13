@@ -2,7 +2,7 @@
 
 **DIY RISC-V semiconductor fab at 180nm | $100K → 100 chips/month @ $500**
 
-[![View Site](https://img.shields.io/badge/View-GitHub%20Pages-00ff00?style=for-the-badge)](https://your-username.github.io/chipfab)
+[![View Site](https://img.shields.io/badge/View-GitHub%20Pages-00ff00?style=for-the-badge)](https://teslasolar.github.io/chipfab)
 
 ## 🧬 Chip Specification
 
@@ -35,7 +35,7 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/chipfab.git
+git clone https://github.com/teslasolar/chipfab.git
 
 # Open locally
 cd chipfab
@@ -43,6 +43,18 @@ python -m http.server 8000
 
 # Visit http://localhost:8000
 ```
+
+## 🏭 3D Factory View
+
+Explore the chip fabrication process in interactive 3D! Navigate through a virtual cleanroom with:
+- 🤖 Wafer handling robots
+- 📏 Lithography steppers
+- ⚡ Etching chambers
+- 🔥 Diffusion furnaces
+- 🌀 Spin coaters
+- 🧠 Test stations
+
+**[Launch 3D Factory](factory3d/index.html)** | Mouse: Orbit | Scroll: Zoom
 
 ## 💰 Economics
 

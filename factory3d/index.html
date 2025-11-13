@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔬 LocalChip 3D Factory | Interactive Fab Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+
+        #canvas {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #00ff00;
+            background: rgba(0,0,0,0.85);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #00ff00;
+            font-size: 12px;
+            max-width: 300px;
+        }
+
+        #info h2 {
+            margin-bottom: 10px;
+            color: #00ffff;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 15px;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #00ff00;
+            color: #0a0a0a;
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: #00ff00;
+            background: rgba(0,0,0,0.85);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #00ff00;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <a href="../index.html" class="nav-btn">← Home</a>
+
+    <div id="info">
+        <h2>🔬 LocalChip 3D Fab</h2>
+        <strong>Equipment:</strong><br>
+        🤖 Wafer Robots<br>
+        📏 Litho Stepper<br>
+        ⚡ Etch Chamber<br>
+        🔥 Furnace (1100°C)<br>
+        🌀 Spin Coater<br>
+        🧠 Test Station<br>
+        <br>
+        <strong>Controls:</strong><br>
+        Mouse: Orbit view<br>
+        Scroll: Zoom in/out<br>
+        Auto-rotate: ON
+    </div>
+
+    <div id="legend">
+        <strong>Process Flow →</strong><br>
+        Design → Mask → Litho → Etch → Dope → Metal → Test
+    </div>
+
+    <!-- Load all equipment templates -->
+    <script src="templates/wafer_robot.js"></script>
+    <script src="templates/lithography_stepper.js"></script>
+    <script src="templates/etching_chamber.js"></script>
+    <script src="templates/diffusion_furnace.js"></script>
+    <script src="templates/spin_coater.js"></script>
+    <script src="templates/test_station.js"></script>
+
+    <script>
+        class ChipFabFactory {
+            constructor() {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('canvas'),
+                    antialias: true
+                });
+
+                this.equipment = [];
+                this.time = 0;
+                this.autoRotate = true;
+                this.cameraAngle = 0;
+
+                this.init();
+            }
+
+            init() {
+                this.setupRenderer();
+                this.setupCamera();
+                this.setupLighting();
+                this.createCleanRoom();
+                this.createFabEquipment();
+                this.setupControls();
+                this.animate();
+
+                window.addEventListener('resize', () => this.onWindowResize());
+                console.log('🔬 LocalChip 3D Factory initialized');
+            }
+
+            setupRenderer() {
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setClearColor(0x0a0a0a);
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            }
+
+            setupCamera() {
+                this.camera.position.set(60, 40, 60);
+                this.camera.lookAt(0, 0, 0);
+            }
+
+            setupLighting() {
+                // Ambient light (cleanroom glow)
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+                this.scene.add(ambientLight);
+
+                // Main overhead lights (cleanroom)
+                const mainLight = new THREE.DirectionalLight(0xffffff, 0.7);
+                mainLight.position.set(30, 50, 20);
+                mainLight.castShadow = true;
+                mainLight.shadow.mapSize.width = 2048;
+                mainLight.shadow.mapSize.height = 2048;
+                this.scene.add(mainLight);
+
+                // Colored accent lights (process stations)
+                const accentLights = [
+                    { color: 0x00ff00, pos: [30, 15, 30], intensity: 0.8 },
+                    { color: 0x00ffff, pos: [-30, 15, 30], intensity: 0.8 },
+                    { color: 0xff6600, pos: [30, 15, -30], intensity: 1.2 }, // furnace
+                    { color: 0x0088ff, pos: [-30, 15, -30], intensity: 0.8 }
+                ];
+
+                accentLights.forEach(light => {
+                    const pointLight = new THREE.PointLight(light.color, light.intensity, 50);
+                    pointLight.position.set(...light.pos);
+                    this.scene.add(pointLight);
+                });
+            }
+
+            createCleanRoom() {
+                // Floor (cleanroom white)
+                const floorGeometry = new THREE.PlaneGeometry(100, 100);
+                const floorMaterial = new THREE.MeshStandardMaterial({
+                    color: 0x111111,
+                    metalness: 0.3,
+                    roughness: 0.7
+                });
+                const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+                floor.rotation.x = -Math.PI / 2;
+                floor.receiveShadow = true;
+                this.scene.add(floor);
+
+                // Grid lines (process areas)
+                const gridHelper = new THREE.GridHelper(100, 20, 0x003300, 0x001100);
+                this.scene.add(gridHelper);
+
+                // Cleanroom walls (transparent)
+                const wallMaterial = new THREE.MeshPhongMaterial({
+                    color: 0x00ff00,
+                    transparent: true,
+                    opacity: 0.05,
+                    side: THREE.DoubleSide
+                });
+
+                // Back wall
+                const wallGeom = new THREE.PlaneGeometry(100, 30);
+                const backWall = new THREE.Mesh(wallGeom, wallMaterial);
+                backWall.position.set(0, 15, -50);
+                this.scene.add(backWall);
+            }
+
+            createFabEquipment() {
+                // Layout equipment in process flow order
+
+                // Wafer robots (loading/unloading)
+                this.equipment.push(createWaferRobot(this.scene, {x: -35, y: 0, z: -35}));
+                this.equipment.push(createWaferRobot(this.scene, {x: 35, y: 0, z: 35}));
+
+                // Spin coater (photoresist application)
+                this.equipment.push(createSpinCoater(this.scene, {x: -25, y: 0, z: -15}));
+
+                // Lithography stepper (exposure)
+                this.equipment.push(createLithographyStepper(this.scene, {x: 0, y: 0, z: -25}));
+
+                // Etching chamber
+                this.equipment.push(createEtchingChamber(this.scene, {x: 25, y: 0, z: -15}));
+
+                // Diffusion furnace (doping & anneal)
+                this.equipment.push(createDiffusionFurnace(this.scene, {x: 25, y: 0, z: 15}));
+
+                // Test station
+                this.equipment.push(createTestStation(this.scene, {x: -25, y: 0, z: 25}));
+
+                // Central inspection point
+                const inspectionLight = new THREE.PointLight(0x00ff00, 2, 20);
+                inspectionLight.position.set(0, 10, 0);
+                this.scene.add(inspectionLight);
+            }
+
+            setupControls() {
+                let mouseDown = false;
+                let mouseX = 0, mouseY = 0;
+                let cameraHeight = 40;
+                let cameraDistance = 85;
+
+                // Mouse controls
+                document.addEventListener('mousedown', (e) => {
+                    mouseDown = true;
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    this.autoRotate = false; // Stop auto-rotate on manual control
+                });
+
+                document.addEventListener('mouseup', () => {
+                    mouseDown = false;
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!mouseDown) return;
+
+                    const deltaX = e.clientX - mouseX;
+                    const deltaY = e.clientY - mouseY;
+
+                    this.cameraAngle += deltaX * 0.01;
+                    cameraHeight += deltaY * 0.5;
+                    cameraHeight = Math.max(5, Math.min(100, cameraHeight));
+
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                // Scroll for zoom
+                document.addEventListener('wheel', (e) => {
+                    cameraDistance += e.deltaY * 0.1;
+                    cameraDistance = Math.max(30, Math.min(200, cameraDistance));
+                });
+
+                // Update camera position
+                this.updateCamera = () => {
+                    // Auto-rotate if enabled
+                    if (this.autoRotate) {
+                        this.cameraAngle += 0.002;
+                    }
+
+                    this.camera.position.x = Math.cos(this.cameraAngle) * cameraDistance;
+                    this.camera.position.z = Math.sin(this.cameraAngle) * cameraDistance;
+                    this.camera.position.y = cameraHeight;
+                    this.camera.lookAt(0, 0, 0);
+                };
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                this.time += 0.016; // ~60fps
+
+                // Update all equipment animations
+                this.equipment.forEach(equip => {
+                    if (equip && equip.userData && equip.userData.animate) {
+                        equip.userData.animate(this.time);
+                    }
+                });
+
+                // Update camera
+                if (this.updateCamera) {
+                    this.updateCamera();
+                }
+
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            onWindowResize() {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        }
+
+        // Initialize factory when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            new ChipFabFactory();
+        });
+    </script>
+</body>
+</html>
